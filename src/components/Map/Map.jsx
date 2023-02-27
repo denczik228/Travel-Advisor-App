@@ -7,7 +7,13 @@ import Rating from '@material-ui/lab/Rating';
 
 import useStyles from './styles';
 
-const Map = ({ setCoordinates, setBounds, coordinates, places }) => {
+const Map = ({
+  setCoordinates,
+  setBounds,
+  coordinates,
+  places,
+  setChildClicked
+}) => {
   const classes = useStyles();
   const isDesktop = useMediaQuery("(min-width:600px)");
 
@@ -22,30 +28,38 @@ const Map = ({ setCoordinates, setBounds, coordinates, places }) => {
         options={""}
         onChange={(e) => {
           console.log(e);
-          setCoordinates({ lat: e.center.lat, lng: e.center.lng })
-          setBounds({ne: e.marginBounds.ne, sw: e.marginBounds.sw})
+          setCoordinates({ lat: e.center.lat, lng: e.center.lng });
+          setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
         }}
-        onChildClick={""}
+        onChildClick={(child) =>
+          setChildClicked(child)
+        }
       >
-        {places?.map((place,i) => (
+        {places?.map((place, i) => (
           <div
             className={classes.markerContainer}
             lat={Number(place.latitude)}
             lng={Number(place.longitude)}
-            key={i}>
+            key={i}
+          >
             {!isDesktop ? (
-              <LocationOnOutlinedIcon color='primary' fontSize="large"/>
+              <LocationOnOutlinedIcon color="primary" fontSize="large" />
             ) : (
-                <Paper elevation={3} className={classes.paper}>
-                  <Typography variant='subtitle2' gutterBottom>
-                    {place.name}
-                  </Typography>
-                  <img
+              <Paper elevation={3} className={classes.paper}>
+                <Typography variant="subtitle2" gutterBottom>
+                  {place.name}
+                </Typography>
+                <img
                   className={classes.pointer}
-                  src={place.photo ? place.photo.images.large.url : 'https://as1.ftcdn.net/v2/jpg/03/24/73/92/1000_F_324739203_keeq8udvv0P2h1MLYJ0GLSlTBagoXS48.jpg'}
-                    alt={place.name} />
-                  <Rating size='small' value={ Number(place.rating)} readOnly />
-                </Paper>
+                  src={
+                    place.photo
+                      ? place.photo.images.large.url
+                      : "https://as1.ftcdn.net/v2/jpg/03/24/73/92/1000_F_324739203_keeq8udvv0P2h1MLYJ0GLSlTBagoXS48.jpg"
+                  }
+                  alt={place.name}
+                />
+                <Rating size="small" value={Number(place.rating)} readOnly />
+              </Paper>
             )}
           </div>
         ))}
