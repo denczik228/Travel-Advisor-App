@@ -15,7 +15,8 @@ export const getPlacesData = async (type, sw, ne) => {
            "X-RapidAPI-Key": process.env.REACT_APP_X_RapidAPI_Key,
            "X-RapidAPI-Host": process.env.REACT_APP_X_RapidAPI_Host,
          },
-       }); 
+       });
+      //console.log(data)
         return data
     } catch (error) {
         console.log(error)

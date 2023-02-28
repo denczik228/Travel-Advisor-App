@@ -13,7 +13,8 @@ import { getPlacesData } from "./api/index";
 const App = () => {
 
   const [places, setPlaces] = useState([]);
-  const [filteredPlaces, setFilteredPlaces]=useState([])
+ 
+  const [filteredPlaces, setFilteredPlaces] = useState([])
   const [childClicked, setChildClicked] = useState({});
 
   const [coordinates, setCoordinates] = useState({});
@@ -40,9 +41,9 @@ const App = () => {
       setIsLoading(true);
       getPlacesData(type, bounds.sw, bounds.ne).then((data) => {
         //console.log(data)
-        setPlaces(data?.filter((place) => place.name && place.num_reviews > 0));
-        setFilteredPlaces([]);
-        setIsLoading(false);
+      setPlaces(data?.filter((place) => place.name && place.num_reviews > 0));
+      setFilteredPlaces([]);
+      setIsLoading(false);
       });
     }
   }, [type, bounds]);
