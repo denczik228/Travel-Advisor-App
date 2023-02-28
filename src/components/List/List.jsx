@@ -5,10 +5,8 @@ import { CircularProgress, Grid, Typography,InputLabel,MenuItem, FormControl, Se
 import makeStyles from "./styles";
 import PlaceDetails from '../PlaceDetails/PlaceDetails';
 
-const List = ({ places, childClicked, isLoading }) => {
+const List = ({ places, childClicked, isLoading, type,setType, rating, setRating }) => {
   const classes = makeStyles();
-  const [type, setType] = useState("restaurants");
-  const [star, setStars] = useState("");
 
   //console.log({ childClicked });
   const [elRefs, setElRefs] = useState([]);
@@ -41,7 +39,7 @@ const List = ({ places, childClicked, isLoading }) => {
           </FormControl>
           <FormControl className={classes.formControl}>
             <InputLabel>Rating</InputLabel>
-            <Select value={star} onChange={(e) => setStars(e.target.value)}>
+            <Select value={rating} onChange={(e) => setRating(e.target.value)}>
               <MenuItem value={0}>All</MenuItem>
               <MenuItem value={3}>Above 3.0</MenuItem>
               <MenuItem value={4}>Above 4.0</MenuItem>
